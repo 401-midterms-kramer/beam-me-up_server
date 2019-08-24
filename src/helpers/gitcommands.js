@@ -1,6 +1,6 @@
 
 'use strict'
-module.exports = function(inputObj){
+module.exports = function(inputObj,inUsePortPool){
 const shell = require('shelljs');
  
 if (!shell.which('git')) {
@@ -16,6 +16,17 @@ if (!shell.which('nodemon')){
     shell.exit(1);
 }
 
+let newPort = function(inUsePortPool){
+    let startport = 3000;
+    while(inUsePortPool.includes(startport)){
+        startport++
+    }
+    inUsePortPool.push(startport)
+    return startport;
+}
+
+inputObj.env += `\nPORT=${newPort(inUsePortPool)}`;
+
 shell.exec('echo "hello world"');
 shell.cd('~/repofolder');
 shell.exec(`git clone ${inputObj.repo}`);
@@ -24,6 +35,7 @@ shell.exec(`echo "${inputObj.env}" > .env`);
 shell.exec(`npm i`);
 shell.exec(`nodemon ${inputObj.entryPoint}`, {async:true})
 shell.echo('hey this slot is free')
+
 return `${inputObj.repoName} is running on PORT ${inputObj.env.split('=')[inputObj.env.split('=').length -1]}`
 // Copy files to release dir
 /*
