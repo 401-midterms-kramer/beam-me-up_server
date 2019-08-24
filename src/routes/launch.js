@@ -8,8 +8,10 @@ router.post('/launch', auth, theMagic);
 
 // Route Handlers
 function theMagic(req, res, next) {
+  //assign inUsePortPool to an array containing all the currently taken ports
   let repoData = req.body;
   shellscript(repoData, inUsePortPool).then(repodata => {
+    // right now repodata will be the results from this single repo starting
     res.status(200).json(repodata);
   })
 }
