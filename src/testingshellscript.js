@@ -11,12 +11,14 @@ let inputObj = {
     env: ``
 }
 
-console.log(shellscript(inputObj,inUsePortPool))
-
 inputObj2 = {
     repo:'https://github.com/leeroywking/andy-best-frand.git',
     repoName: 'andy-best-frand',
     entryPoint: `index.js`,
     env: ``
 }
-console.log(shellscript(inputObj2, inUsePortPool))
+
+shellscript(inputObj,inUsePortPool).then(res => console.log(res))
+
+
+shellscript(inputObj2, inUsePortPool).then(res => console.log(res))

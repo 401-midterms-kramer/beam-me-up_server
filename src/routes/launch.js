@@ -8,10 +8,10 @@ router.post('/launch', auth, theMagic);
 
 // Route Handlers
 function theMagic(req, res, next) {
-  let thingie = req.body
-  let output = thingie;
-  console.log(thingie)
-  res.status(200).json(output);
+  let repoData = req.body;
+  shellscript(repoData, inUsePortPool).then(repodata => {
+    res.status(200).json(repodata);
+  })
 }
 
 module.exports = router;
