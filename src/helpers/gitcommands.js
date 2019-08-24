@@ -24,6 +24,7 @@ shell.exec(`echo "${inputObj.env}" > .env`);
 shell.exec(`npm i`);
 shell.exec(`nodemon ${inputObj.entryPoint}`)
 
+return `${inputObj.repoName} is running on PORT ${inputObj.env.split('=')[this.length -1]}`
 // Copy files to release dir
 /*
 shell.rm('-rf', 'out/Release');
