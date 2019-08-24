@@ -1,10 +1,10 @@
 
 'use strict'
 const shell = require('shelljs');
-
+const child_process = require('child_process')
 module.exports = function (inputObj, inUsePortPool) {
   return new Promise((res, rej) => {
-
+    console.log(inUsePortPool)
     if (!shell.which('git')) {
       shell.echo('Sorry, this script requires git');
       shell.exit(1);
@@ -19,7 +19,8 @@ module.exports = function (inputObj, inUsePortPool) {
     }
 
     let newPort = function (inUsePortPool) {
-      let startport = 3000;
+      let startport = Math.floor((Math.random()*1000) + 3001); 
+      // this is a short term hack to making things work has roughly a 1/1000 chance of failure and is a 'bad solution but this is a placeholder until we get the database up and running'
       while (inUsePortPool.includes(startport)) {
         startport++
       }
@@ -36,13 +37,13 @@ module.exports = function (inputObj, inUsePortPool) {
     shell.cd(`${inputObj.repoName}`);
     shell.exec(`echo "${inputObj.env}" > .env`);
     shell.exec(`npm i`);
-    shell.exec(`nodemon ${inputObj.entryPoint}`, { async: true })
-    shell.echo('hey this slot is free')
-
+    console.log(shell.env);
+    shell.env['PORT'] = port
+    shell.exec(`nodemon ${inputObj.entryPoint}`, { async: true})
     res({
       string: `${inputObj.repoName} is running on PORT ${inputObj.env.split('=')[inputObj.env.split('=').length - 1]}`,
       inputObj
     })
-
+    rej(err => console.error(err))
   })
 };

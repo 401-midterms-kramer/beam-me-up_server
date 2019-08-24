@@ -22,3 +22,9 @@ shellscript(inputObj,inUsePortPool).then(res => console.log(res))
 
 
 shellscript(inputObj2, inUsePortPool).then(res => console.log(res))
+
+/*
+echo '{"repo": "https://github.com/leeroywking/bad-guy-quotes.git","repoName": "bad-guy-quotes","entryPoint":"server.js","env": ""}' | http POST :3000/launch -a lee:lee
+
+echo '{"repo": "https://github.com/leeroywking/andy-best-frand.git","repoName": "andy-best-frand","entryPoint": "index.js","env": ""}' | http POST :3000/launch -a lee:lee
+*/
