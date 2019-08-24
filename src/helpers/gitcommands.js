@@ -22,9 +22,9 @@ shell.exec(`git clone ${inputObj.repo}`);
 shell.cd(`${inputObj.repoName}`);
 shell.exec(`echo "${inputObj.env}" > .env`);
 shell.exec(`npm i`);
-shell.exec(`nodemon ${inputObj.entryPoint}`)
-
-return `${inputObj.repoName} is running on PORT ${inputObj.env.split('=')[this.length -1]}`
+shell.exec(`nodemon ${inputObj.entryPoint}`, {async:true})
+shell.echo('hey this slot is free')
+return `${inputObj.repoName} is running on PORT ${inputObj.env.split('=')[inputObj.env.split('=').length -1]}`
 // Copy files to release dir
 /*
 shell.rm('-rf', 'out/Release');

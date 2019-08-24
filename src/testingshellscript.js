@@ -18,4 +18,12 @@ let inputObj = {
 }
 
 inputObj.env += `\nPORT=${newPort(inUsePortPool)}`
-shellscript(inputObj)
+console.log(shellscript(inputObj))
+
+inputObj2 = {
+    repo:'https://github.com/leeroywking/andy-best-frand.git',
+    repoName: 'andy-best-frand',
+    entryPoint: `index.js`
+}
+inputObj2.env += `\nPORT=${newPort(inUsePortPool)}`
+console.log(shellscript(inputObj2))
